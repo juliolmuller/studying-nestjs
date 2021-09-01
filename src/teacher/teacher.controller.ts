@@ -1,14 +1,17 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { TeacherService } from './teacher.service';
 
 @Controller('/teachers')
 export class TeacherController {
+  constructor(private readonly teacherService: TeacherService) {}
+
   @Get('/')
   getAll() {
-    return 'All teachers';
+    return this.teacherService.getAll();
   }
 
   @Get('/:teacherId')
   getById(@Param('teacherId') teacherId: string) {
-    return `Teacher with ID ${teacherId}`;
+    return this.teacherService.getById(teacherId);
   }
 }
